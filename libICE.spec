@@ -4,7 +4,7 @@
 #
 Name     : libICE
 Version  : 1.0.9
-Release  : 6
+Release  : 7
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libICE-1.0.9.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libICE-1.0.9.tar.gz
 Summary  : X Inter Client Exchange Library
@@ -13,6 +13,7 @@ License  : MIT-Opengroup
 Requires: libICE-lib
 Requires: libICE-doc
 BuildRequires : libxslt-bin
+BuildRequires : pkgconfig(xorg-macros)
 BuildRequires : pkgconfig(xproto)
 BuildRequires : pkgconfig(xtrans)
 BuildRequires : xmlto
@@ -26,6 +27,7 @@ code, or online at:
 Summary: dev components for the libICE package.
 Group: Development
 Requires: libICE-lib
+Provides: libICE-devel
 
 %description dev
 dev components for the libICE package.
@@ -51,10 +53,15 @@ lib components for the libICE package.
 %setup -q -n libICE-1.0.9
 
 %build
+export LANG=C
 %configure --disable-static
-make V=1 %{?_smp_mflags}
+make V=1  %{?_smp_mflags}
 
 %check
+export LANG=C
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
@@ -72,8 +79,8 @@ rm -rf %{buildroot}
 /usr/include/X11/ICE/ICEmsg.h
 /usr/include/X11/ICE/ICEproto.h
 /usr/include/X11/ICE/ICEutil.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libICE.so
+/usr/lib64/pkgconfig/ice.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -81,4 +88,5 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libICE.so.6
+/usr/lib64/libICE.so.6.3.0
