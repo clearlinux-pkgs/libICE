@@ -6,7 +6,7 @@
 #
 Name     : libICE
 Version  : 1.0.9
-Release  : 11
+Release  : 12
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libICE-1.0.9.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libICE-1.0.9.tar.gz
 Source99 : http://xorg.freedesktop.org/releases/individual/lib/libICE-1.0.9.tar.gz.sig
